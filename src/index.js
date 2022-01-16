@@ -1,5 +1,7 @@
 import Notiflix, { Block } from 'notiflix';
 import { axiosSearch } from './axiosSearch';
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
 const axios = require('axios').default;
 
 const refs = {
@@ -49,8 +51,8 @@ function onSearch(e) {
 function onRander(response) {
   return response
     .map(
-      ({ webformatURL, tags, likes, views, comments, downloads }) =>
-        `<div class="photo-card">
+      ({ webformatURL, tags, likes, views, comments, downloads, largeImageURL }) =>
+        `<a class="gallery__item photo-card" href="${largeImageURL}">
         <img height="194" width="100%" class="gallery__image" src="${webformatURL}" alt="${tags}" loading="lazy" />
         <div class="info">
           <p class="info-item">
@@ -70,7 +72,7 @@ function onRander(response) {
             ${downloads}
           </p>
         </div>
-      </div>`,
+        </a>`,
     )
     .join('');
 }
@@ -92,3 +94,21 @@ function onLoadMore() {
       Notiflix.Notify.failure(`error response`);
     });
 }
+// --------SimpleLightbox-------//
+
+// refs.galeryEl.addEventListener('click', onSimpleLightbox);
+
+// function onSimpleLightbox(event) {
+//   event.preventDefault();
+//   if (event.target.nodeName !== 'IMG') {
+//     return;
+//   }
+
+//   let gallery = new SimpleLightbox('.gallery a', {
+//     captionsData: 'alt',
+//     captionDelay: 250,
+//   });
+//   gallery.on('closed.simplelightbox', function () {
+//     gallery.refresh();
+//   });
+// }
