@@ -52,7 +52,7 @@ function onRander(response) {
   return response
     .map(
       ({ webformatURL, tags, likes, views, comments, downloads, largeImageURL }) =>
-        `<a class="gallery__item photo-card" href="${largeImageURL}">
+        `<div  class ="photo-card">
         <img height="194" width="100%" class="gallery__image" src="${webformatURL}" alt="${tags}" loading="lazy" />
         <div class="info">
           <p class="info-item">
@@ -72,7 +72,7 @@ function onRander(response) {
             ${downloads}
           </p>
         </div>
-        </a>`,
+        </div>`,
     )
     .join('');
 }
